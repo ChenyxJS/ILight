@@ -34,36 +34,92 @@ canvas,
 web-view,
 :before,
 :after {
-    box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+page {
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: $-color-theme-2;
+}
+
+.flex-cc {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.flex-sc {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.flex-cs {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.flex-clo {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.flex-noWrap {
+	flex-wrap: nowrap;
+}
+
+.flex-justify-sa {
+	justify-content: space-around;
+}
+
+.flex-justify-sb {
+	justify-content: space-between;
+}
+
+.null-box {
+	height: 400rpx;
+	width: 100%;
 }
 
 /* 隐藏scroll-view的滚动条 */
 ::-webkit-scrollbar {
-    display: none;
-    width: 0 !important;
-    height: 0 !important;
-    -webkit-appearance: none;
-    background: transparent;
+	display: none;
+	width: 0 !important;
+	height: 0 !important;
+	-webkit-appearance: none;
+	background: transparent;
 }
 
 // 超出省略,最多5行
 @for $i from 1 through 5 {
-    .text-ellipsis-#{$i} {
-        // vue下，单行和多行显示省略号需要单独处理
-        @if $i == '1' {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        } @else {
-            display: -webkit-box !important;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            word-break: break-all;
-            -webkit-line-clamp: $i;
-            -webkit-box-orient: vertical !important;
-        }
-    }
+	.text-ellipsis-#{$i} {
+		// vue下，单行和多行显示省略号需要单独处理
+		@if $i == '1' {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		} @else {
+			display: -webkit-box !important;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			word-break: break-all;
+			-webkit-line-clamp: $i;
+			-webkit-box-orient: vertical !important;
+		}
+	}
 }
 page {
-    background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }

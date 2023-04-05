@@ -1,5 +1,5 @@
 import { HOME_PAGE, NAVIGATE_TYPE_LIST, NOT_FOUND_PAGE } from '@/enums/routerEnum';
-import { useAuthStore } from '@/state/modules/auth';
+import { useAuthStore } from '@/store/modules/auth';
 import { isIgnoreAuth, jumpLogin } from '@/utils/router/constant';
 
 /**

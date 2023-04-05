@@ -3,6 +3,7 @@
 /node_modules
 .hbuilderx/*
 .idea/*
+.vscode/*
 
 # 忽略文件
 *.log

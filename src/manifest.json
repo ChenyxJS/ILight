@@ -1,5 +1,5 @@
 {
-    "name" : "uniapp_vue3_vite_ts",
+    "name" : "ILght",
     "appid" : "__UNI__38BE53A",
     "description" : "",
     "versionName" : "1.1.2",
@@ -15,6 +15,13 @@
             "waiting" : true,
             "autoclose" : true,
             "delay" : 0
+        },
+        "safearea" : {
+            //安全区域配置，仅iOS平台生效  
+            "bottom" : {
+                // 底部安全区域配置  
+                "offset" : "none" // 底部安全区域偏移，"none"表示不空出安全区域，"auto"自动计算空出安全区域，默认值为"none"  
+            }
         },
         /* 模块配置 */
         "modules" : {},
@@ -53,7 +60,8 @@
                 "ad" : {}
             },
             "splashscreen" : {
-                "useOriginalMsgbox" : true
+                "useOriginalMsgbox" : true,
+                "androidStyle" : "common"
             }
         }
     },
@@ -74,7 +82,7 @@
             "subPackages" : true
         },
         "lazyCodeLoading" : "requiredComponents",
-		"style": "v2"
+        "style" : "v2"
     },
     "mp-alipay" : {
         "usingComponents" : true,
@@ -100,7 +108,7 @@
         "devServer" : {
             "https" : false
         },
-        "title" : "uniapp_vue3_vite_ts",
+        "title" : "ILight",
         "unipush" : {
             "enable" : false
         },

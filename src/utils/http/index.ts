@@ -1,79 +1,50 @@
-import { createAlova } from 'alova';
-import AdapterUniapp from '@alova/adapter-uniapp';
-import { getBaseUrl, isDevMode } from '@/utils/env';
-import { mockAdapter } from '@/mock';
-import { assign } from 'lodash-es';
-import { useAuthStore } from '@/state/modules/auth';
-import { checkStatus } from '@/utils/http/checkStatus';
-import { ContentTypeEnum, ResultEnum } from '@/enums/httpEnum';
-import { Toast } from '@/utils/uniapi/prompt';
-import { API } from '@/services/model/baseModel';
-
-const BASE_URL = getBaseUrl();
-
-const HEADER = {
-    'Content-Type': ContentTypeEnum.JSON,
-    Accept: 'application/json, text/plain, */*',
-};
-
-// @ts-ignore
-/**
- * alova 请求实例
- * @link https://github.com/alovajs/alova
+/*
+ * @Author: chenyx
+ * @Date: 2023-04-03 00:53:36
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2023-04-04 23:22:33
+ * @FilePath: /Ilight-V3/src/utils/http/index.ts
  */
-const alovaInstance = createAlova({
-    baseURL: BASE_URL,
-    ...AdapterUniapp({
-        mockRequest: isDevMode() ? mockAdapter : undefined,
-    }),
-    timeout: 5000,
-    beforeRequest: (method) => {
-        const authStore = useAuthStore();
-        method.config.headers = assign(method.config.headers, HEADER, authStore.getAuthorization);
-    },
-    responsed: {
-        /**
-         * 请求成功的拦截器
-         * 第二个参数为当前请求的method实例，你可以用它同步请求前后的配置信息
-         * @param response
-         * @param method
-         */
-        onSuccess: async (response, method) => {
-            const { config } = method;
-            const { enableDownload, enableUpload } = config;
-            // @ts-ignore
-            const { statusCode, data: rawData } = response;
-            const { code, message, data } = rawData as API;
-            if (statusCode === 200) {
-                if (enableDownload) {
-                    // 下载处理
-                    return rawData;
-                }
-                if (enableUpload) {
-                    // 上传处理
-                    return rawData;
-                }
-                if (code === ResultEnum.SUCCESS) {
-                    return data as any;
-                }
-                message && Toast(message);
-                return Promise.reject(rawData);
-            }
-            checkStatus(statusCode, message || '');
-            return Promise.reject(rawData);
-        },
+import Qs from 'qs';
+import { getBaseUrl } from '../env';
 
-        /**
-         * 请求失败的拦截器，请求错误时将会进入该拦截器。
-         * 第二个参数为当前请求的method实例，你可以用它同步请求前后的配置信息
-         * @param err
-         * @param method
-         */
-        onError: (err, method) => {
-            // error('Request Error!');
-            return Promise.reject({ err, method });
-        },
-    },
-});
+const service = (obj: UniApp.RequestOptions) => {
+    return new Promise((resolve, reject) => {
+        const baseUrl = getBaseUrl();
+        const method = obj.method || 'GET';
+        const url = baseUrl + obj.url || '';
+        const data = Qs.stringify(obj.data || {});
+        const header = obj.header || {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        };
+        uni.request({
+            url: url,
+            data: data,
+            method: method,
+            header: header,
+            sslVerify: false,
+            success: (res) => {
+                console.log('请求url====>', url);
+                console.log('请求传值 ====>', data);
+                console.log('请求返回值====>', res);
 
-export const request = alovaInstance;
+                if (res.statusCode === 200) {
+                    const data = res.data as BaseApiResult;
+                    if (data.tip === '10001') {
+                        // 返回登录失效 需要重新登录
+                        // quickLogin();
+                    } else {
+                        resolve(data);
+                    }
+                } else {
+                    reject(res);
+                }
+            },
+            fail: (err) => {
+                reject(err);
+            },
+            complete: () => {},
+        });
+    });
+};
+export default service;

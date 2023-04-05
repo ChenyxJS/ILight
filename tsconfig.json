@@ -1,6 +1,6 @@
 {
-    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "vite.config.*"], // 指定要包含在编译中的文件匹配列表
-    "exclude": [], // 指定要从编译中排除的文件列表
+    "include": ["src/**/*.ts", "src/**/*.vue", "types/**/*.d.ts"],
+    "exclude": ["node_modules", "dist", "**/*.js"],
     "compilerOptions": {
         "baseUrl": "./", // 指定基目录以解析非相对模块名
         // "rootDir": "./src", // 在源文件中指定根文件夹
@@ -12,7 +12,9 @@
         "lib": ["ESNext", "DOM", "ScriptHost"], // TS需要引用的库
         "types": ["@dcloudio/types", "@types/node"], // 指定要包含的类型包名，而不需要在源文件中引用
         "removeComments": true, // 删除注释
-        "paths": { "@/*": ["./src/*"] }, //指定一组条目，它们将导入重新映射到其他查找位置
+        "paths": {
+            "@/*": ["./src/*"]
+        }, //指定一组条目，它们将导入重新映射到其他查找位置
         "pretty": true, // 在输出中启用颜色和格式，使编译器错误更容易阅读
         "newLine": "crlf", // 设置发出文件的换行符
         // "sourceMap": true, //为发出的JavaScript文件创建源映射文件。
@@ -48,5 +50,9 @@
         "noEmitOnError": true, //有错误时不进行编译
         "resolveJsonModule": true //是否解析 JSON 模块
         // "incremental": true // 增量编译
-    }
+    },
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true /* 允许默认导入 */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "typeRoots": ["./node_modules/@types/", "./types"] /* 指定多个文件夹，这些文件夹的作用类似于 './node_modules/@types'. */
 }

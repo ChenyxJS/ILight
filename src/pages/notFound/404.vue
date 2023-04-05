@@ -1,3 +1,10 @@
+<!--
+ * @Author: chenyx
+ * @Date: 2023-04-03 00:53:36
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2023-04-03 13:57:57
+ * @FilePath: /Ilight-V3/src/pages/notFound/404.vue
+-->
 <script lang="ts" setup>
 import { onLoad } from '@dcloudio/uni-app';
 import { ref } from 'vue';
@@ -7,7 +14,7 @@ import { useRouter } from '@/hooks/router';
 const go = ref<string>('');
 const router = useRouter();
 const redirect = ref<string>('');
-onLoad((query) => {
+onLoad((query: any) => {
     go.value = query.go || '';
     redirect.value = query.redirect || '';
 });

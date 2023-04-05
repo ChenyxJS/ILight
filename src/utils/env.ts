@@ -1,3 +1,10 @@
+/*
+ * @Author: chenyx
+ * @Date: 2023-04-03 00:53:36
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2023-04-04 22:37:53
+ * @FilePath: /Ilight-V3/src/utils/env.ts
+ */
 import pkg from '../../package.json';
 import { judgePlatform } from '@/utils/platform';
 import { PLATFORMS } from '@/enums/platformEnum';
@@ -56,12 +63,19 @@ export function isProdMode(): boolean {
 }
 
 /**
- * @description: Get environment VITE_BASE_URL value
+ * @description: Get environment VITE_APP_BASE_URL value
  * @returns:
  * @example:
  */
 export function getBaseUrl(): string {
-    return getEnvValue<string>('VITE_BASE_URL');
+    let BaseUrl = '';
+    // #ifdef MP||APP-PLUS
+    BaseUrl = 'VITE_APP_BASE_URL';
+    // #endif
+    // #ifdef H5
+    BaseUrl = 'VITE_APP_BASE_API';
+    // #endif
+    return getEnvValue<string>(BaseUrl);
 }
 
 /**

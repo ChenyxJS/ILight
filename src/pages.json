@@ -1,6 +1,23 @@
 {
     "pages": [
         {
+            "path": "pages/login/index",
+            "style": {
+                "navigationBarTitleText": "登录",
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/home/index",
+            "style": {
+                "navigationBarTitleText": "首页",
+                "navigationStyle": "custom"
+            },
+            "meta": {
+                "ignoreAuth": true
+            }
+        },
+        {
             "path": "pages/index/index",
             "style": {
                 "navigationBarTitleText": "首页",
@@ -28,15 +45,7 @@
                 "ignoreAuth": true
             }
         },
-        {
-            "path": "pages/login/index",
-            "style": {
-                "navigationBarTitleText": "登录"
-            },
-            "meta": {
-                "ignoreAuth": true
-            }
-        },
+
         {
             "path": "pages/log/index",
             "style": {
@@ -98,7 +107,7 @@
         "navigationBarTitleText": "uni-app",
         "navigationBarBackgroundColor": "#262833",
         "backgroundColor": "#F8F8F8",
-        "navigationStyle": "default",
+        "navigationStyle": "custom",
         "renderingMode": "seperated",
         "pageOrientation": "portrait"
     },
@@ -108,7 +117,7 @@
         "backgroundColor": "#FFFFFF",
         "list": [
             {
-                "pagePath": "pages/index/index",
+                "pagePath": "pages/home/index",
                 "text": "首页",
                 "iconPath": "static/images/tabBar/home.png",
                 "selectedIconPath": "static/images/tabBar/selectedHome.png"

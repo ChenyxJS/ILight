@@ -1,9 +1,16 @@
+<!--
+ * @Author: chenyx
+ * @Date: 2023-04-03 00:53:36
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2023-04-03 12:35:57
+ * @FilePath: /Ilight-V3/src/pages/about/index.vue
+-->
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { onShow } from '@dcloudio/uni-app';
 import BasicButton from '@/components/BasicButton/index.vue';
 import AppProvider from '@/components/AppProvider/inedx.vue';
-import { useAuthStore } from '@/state/modules/auth';
+import { useAuthStore } from '@/store/modules/auth';
 import { useRouter } from '@/hooks/router';
 
 const authStore = useAuthStore();
@@ -17,11 +24,7 @@ const handleJump = (url: string) => {
 };
 
 // 登出
-const handleLoginOut = () => {
-    authStore.loginOut().then(() => {
-        isLogin.value = false;
-    });
-};
+const handleLoginOut = () => {};
 </script>
 
 <template>

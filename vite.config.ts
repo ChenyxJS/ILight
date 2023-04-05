@@ -1,8 +1,14 @@
+/*
+ * @Author: chenyx
+ * @Date: 2023-04-03 00:53:36
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2023-04-05 20:12:06
+ * @FilePath: /Ilight-V3/vite.config.ts
+ */
 // Vite中文网：https://vitejs.cn/config/
 import { ConfigEnv, loadEnv, UserConfig } from 'vite';
 import { resolve } from 'path';
 import uni from '@dcloudio/vite-plugin-uni';
-import Unocss from 'unocss/vite';
 
 export default ({ mode }: ConfigEnv): UserConfig => {
     const root = process.cwd();
@@ -26,15 +32,10 @@ export default ({ mode }: ConfigEnv): UserConfig => {
             // open: true,
             port: env.VITE_PORT as any,
             proxy: {
-                '/api': {
-                    target: env.VITE_BASE_URL,
+                [env.VITE_APP_BASE_API as string]: {
+                    target: 'http://192.168.0.6:8080',
                     changeOrigin: true,
-                    rewrite: (path) => path.replace(/^\/api/, ''),
-                },
-                '/upload': {
-                    target: env.VITE_BASE_URL,
-                    changeOrigin: true,
-                    rewrite: (path) => path.replace(/^\/upload/, ''),
+                    rewrite: (path) => path.replace(new RegExp('^' + env.VITE_APP_BASE_API), ''),
                 },
             },
         },
@@ -48,14 +49,10 @@ export default ({ mode }: ConfigEnv): UserConfig => {
                     chunkFileNames: `assets/[name].${new Date().getTime()}.js`,
                     assetFileNames: `assets/[name].${new Date().getTime()}.[ext]`,
                     compact: true,
-                    // manualChunks: {
-                    //     vue: ['vue', 'vue-router', 'vuex'],
-                    //     echarts: ['echarts'],
-                    // },
                 },
             },
         },
         // 插件
-        plugins: [uni(), Unocss()],
+        plugins: [uni()],
     };
 };

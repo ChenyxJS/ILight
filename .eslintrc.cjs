@@ -1,3 +1,10 @@
+/*
+ * @Author: chenyx
+ * @Date: 2023-04-03 00:53:36
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2023-04-03 20:45:46
+ * @FilePath: /Ilight-V3/.eslintrc.cjs
+ */
 // 参考：https://eslint.bootcss.com/docs/rules/
 // 参考：https://blog.csdn.net/x550392236/article/details/89497202
 // 参考：https://blog.csdn.net/brokenkay/article/details/111106266
@@ -27,7 +34,7 @@ module.exports = {
         indent: ['error', 4, { SwitchCase: 1 }], //代码缩进2个空格
         semi: ['error', 'always'], //行尾需要有分号
         quotes: ['error', 'single'], //强制使用一致的反勾号、双引号或单引号
-        'linebreak-style': ['error', 'windows'], //强制使用一致的换行风格,"unix"：\n 表示 LF , "windows"：\r\n 表示 CRLF
+        // 'linebreak-style': ['error', 'unix'], //强制使用一致的换行风格,"unix"：\n 表示 LF , "windows"：\r\n 表示 CRLF
         eqeqeq: ['error', 'always', { null: 'ignore' }], //比较时强制使用 === 或者 !==,但对null作比较时可以不用全等
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': [
